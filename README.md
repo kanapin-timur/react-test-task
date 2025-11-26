@@ -1,1 +1,1 @@
-Stack: Typescript, Tailwind, React Toolkit, React Router, React Hook Form
+Stack: Typescript, Tailwind, React Toolkit, React Router, React Hook Form, Motion
