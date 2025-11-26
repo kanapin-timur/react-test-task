@@ -1,4 +1,5 @@
 import React from 'react';
+import { motion, AnimatePresence } from 'motion/react';
 import { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../store/hooks';
 import {
@@ -11,6 +12,7 @@ import {
 import { useGetProductsQuery } from '../store/services/productApi';
 import ProductItem from '../components/ProductItem';
 import { Link } from 'react-router-dom';
+import Spinner from '../components/Spinner';
 
 const ProductsPage: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -48,7 +50,7 @@ const ProductsPage: React.FC = () => {
   }, [data, dispatch, products.length]);
 
   return (
-    <div className="p-10">
+    <div className="p-10 overflow-hidden">
       <div className="flex flex-col flex-wrap justify-between mb-6 lg:flex-row">
         <div className="flex items-end">
           <Link
@@ -102,16 +104,31 @@ const ProductsPage: React.FC = () => {
         </div>
       </div>
       {filteredProducts.length === 0 && !isLoading && !error && (
-        <div className="font-bold text-4xl">No products to display.</div>
+        <div className="font-bold text-2xl text-center">
+          No products to display
+        </div>
       )}
-      {isLoading && <div>Loading...</div>}
+      {isLoading && (
+        <div className="min-h-[516px] flex justify-center items-center">
+          <Spinner />
+        </div>
+      )}
       {error && <div className="text-red-800">{error.toString()}</div>}
       {products.length > 0 && (
-        <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
-          {currentItems.map((product) => (
-            <ProductItem key={product.id} product={product} />
-          ))}
-        </div>
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={currentPage}
+            initial={{ opacity: 0, x: 50 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: -50 }}
+            transition={{ duration: 0.3 }}
+            className="grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5"
+          >
+            {currentItems.map((product) => (
+              <ProductItem key={product.id} product={product} />
+            ))}
+          </motion.div>
+        </AnimatePresence>
       )}
       <div className="flex justify-center gap-2 mt-6">
         <button
