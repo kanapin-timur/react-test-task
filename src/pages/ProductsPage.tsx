@@ -49,24 +49,26 @@ const ProductsPage: React.FC = () => {
 
   return (
     <div className="p-10">
-      <div className="flex justify-between mb-6">
-        <div className="flex items-end">
+      <div className="flex flex-wrap justify-between mb-6">
+        <div className="flex shrink-0 items-end">
           <Link
             to="/react-test-task/create-product"
-            className="font-bold text-2xl hover:underline mr-10"
+            className="font-bold text-2xl hover:underline"
           >
             Create product page
           </Link>
         </div>
-        <div className="flex flex-wrap items-end">
-          <input
-            type="text"
-            value={searchQuery}
-            placeholder="Поиск..."
-            className="border py-2 px-3 rounded-lg mr-6 min-w-[300px]"
-            onChange={(e) => dispatch(setSearchQuery(e.target.value))}
-          />
-          <div className="mr-6 gap-4 flex flex-wrap">
+        <div className="flex flex-row items-end gap-4 flex-wrap">
+          <div className="w-80">
+            <input
+              type="text"
+              value={searchQuery}
+              placeholder="Search products..."
+              className="w-full border py-2 px-3 rounded-lg"
+              onChange={(e) => dispatch(setSearchQuery(e.target.value))}
+            />
+          </div>
+          <div className="gap-2 flex">
             <button
               className="font-bold cursor-pointer"
               onClick={() => dispatch(sortByPriceAsc())}
@@ -80,10 +82,10 @@ const ProductsPage: React.FC = () => {
               Price: High to Low ↓
             </button>
           </div>
-          <div>
+          <div className="flex gap-4">
             <button
               onClick={() => setShowFavoritesOnly(false)}
-              className="py-2 px-3 bg-gray-500 text-white rounded-md mr-3 cursor-pointer font-bold hover:bg-gray-600 transition duration-200"
+              className="py-2 px-3 bg-gray-500 text-white rounded-md cursor-pointer font-bold hover:bg-gray-600 transition duration-200"
             >
               Show all
             </button>

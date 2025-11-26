@@ -1,7 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
 import type { IProduct } from '../../services/productTypes';
-
 interface ProductsState {
   items: IProduct[];
   searchQuery: string;
@@ -47,6 +46,7 @@ export const productsSlice = createSlice({
     },
     setSearchQuery(state, action: PayloadAction<string>) {
       state.searchQuery = action.payload;
+      state.currentPage = 1;
     },
     setCurrentPage(state, action: PayloadAction<number>) {
       state.currentPage = action.payload;
