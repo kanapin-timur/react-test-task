@@ -49,8 +49,8 @@ const ProductsPage: React.FC = () => {
 
   return (
     <div className="p-10">
-      <div className="flex flex-wrap justify-between mb-6">
-        <div className="flex shrink-0 items-end">
+      <div className="flex flex-col flex-wrap justify-between mb-6 lg:flex-row">
+        <div className="flex items-end">
           <Link
             to="/react-test-task/create-product"
             className="font-bold text-2xl hover:underline"
@@ -58,7 +58,7 @@ const ProductsPage: React.FC = () => {
             Create product page
           </Link>
         </div>
-        <div className="flex flex-row items-end gap-4 flex-wrap">
+        <div className="flex flex-col items-start gap-4 flex-wrap mt-4 xl:mt-0 lg:flex-row lg:items-end">
           <div className="w-80">
             <input
               type="text"

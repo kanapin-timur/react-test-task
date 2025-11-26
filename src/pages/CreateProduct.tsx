@@ -23,7 +23,7 @@ export default function CreateProductPage({
   });
 
   const submit = (data: IForm) => {
-    onSubmit({ ...data });
+    onSubmit({ ...data, price: Number(data.price) });
     reset();
   };
 
@@ -68,7 +68,10 @@ export default function CreateProductPage({
             {...register('price', {
               required: 'Please enter a price',
               min: { value: 1, message: 'Please enter a price greater than 0' },
-              valueAsNumber: true,
+              pattern: {
+                value: /^[0-9]+$/,
+                message: 'Please enter a valid price',
+              },
             })}
           />
           {errors.price && (
@@ -99,6 +102,10 @@ export default function CreateProductPage({
               minLength: {
                 value: 10,
                 message: 'Description must be at least 10 characters long',
+              },
+              maxLength: {
+                value: 100,
+                message: 'Description must be at most 100 characters long',
               },
             })}
           />
