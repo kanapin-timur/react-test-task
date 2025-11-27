@@ -38,6 +38,12 @@ export const productsSlice = createSlice({
         };
       },
     },
+    updateProduct(state, action: PayloadAction<IProduct>) {
+      const index = state.items.findIndex((p) => p.id === action.payload.id);
+      if (index !== -1) {
+        state.items[index] = action.payload;
+      }
+    },
     sortByPriceAsc: (state) => {
       state.items.sort((a, b) => a.price - b.price);
     },
@@ -62,5 +68,6 @@ export const {
   sortByPriceDesc,
   setSearchQuery,
   setCurrentPage,
+  updateProduct,
 } = productsSlice.actions;
 export default productsSlice.reducer;

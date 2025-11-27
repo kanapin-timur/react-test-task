@@ -60,6 +60,7 @@ const ProductsPage: React.FC = () => {
             Create product page
           </Link>
         </div>
+
         <div className="flex flex-col items-start gap-4 flex-wrap mt-4 xl:mt-0 lg:flex-row lg:items-end">
           <div className="w-80">
             <input
@@ -70,6 +71,7 @@ const ProductsPage: React.FC = () => {
               onChange={(e) => dispatch(setSearchQuery(e.target.value))}
             />
           </div>
+
           <div className="gap-2 flex">
             <button
               className="font-bold cursor-pointer"
@@ -77,6 +79,7 @@ const ProductsPage: React.FC = () => {
             >
               Price: Low to High ↑
             </button>
+
             <button
               className="font-bold cursor-pointer"
               onClick={() => dispatch(sortByPriceDesc())}
@@ -84,6 +87,7 @@ const ProductsPage: React.FC = () => {
               Price: High to Low ↓
             </button>
           </div>
+
           <div className="flex gap-4">
             <button
               onClick={() => setShowFavoritesOnly(false)}
@@ -91,6 +95,7 @@ const ProductsPage: React.FC = () => {
             >
               Show all
             </button>
+
             <button
               onClick={() => {
                 setShowFavoritesOnly(true);
@@ -103,17 +108,25 @@ const ProductsPage: React.FC = () => {
           </div>
         </div>
       </div>
+
       {filteredProducts.length === 0 && !isLoading && !error && (
-        <div className="font-bold text-2xl text-center">
+        <div className="min-h-[516px] font-bold text-2xl flex justify-center items-center">
           No products to display
         </div>
       )}
+
       {isLoading && (
         <div className="min-h-[516px] flex justify-center items-center">
           <Spinner />
         </div>
       )}
-      {error && <div className="text-red-800">{error.toString()}</div>}
+
+      {error && (
+        <div className="min-h-[516px] text-red-800 flex justify-center items-center">
+          {error.toString()}
+        </div>
+      )}
+
       {products.length > 0 && (
         <AnimatePresence mode="wait">
           <motion.div
@@ -130,6 +143,7 @@ const ProductsPage: React.FC = () => {
           </motion.div>
         </AnimatePresence>
       )}
+
       <div className="flex justify-center gap-2 mt-6">
         <button
           disabled={currentPage === 1}

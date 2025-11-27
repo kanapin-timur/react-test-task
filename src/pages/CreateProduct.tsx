@@ -52,6 +52,10 @@ export default function CreateProductPage({
                 value: 3,
                 message: 'Title must be at least 3 characters long',
               },
+              maxLength: {
+                value: 70,
+                message: 'Title must be at most 70 characters long',
+              },
             })}
           />
           {errors.title && (
@@ -60,16 +64,18 @@ export default function CreateProductPage({
             </p>
           )}
         </div>
+
         <div className="relative">
           <input
             type="number"
+            step="0.01"
             placeholder="Price"
             className="w-full py-3 px-4 rounded-lg outline-none focus:ring-2 focus:ring-blue-500 shadow-sm"
             {...register('price', {
               required: 'Please enter a price',
               min: { value: 1, message: 'Please enter a price greater than 0' },
               pattern: {
-                value: /^[0-9]+$/,
+                value: /^\d+([.]\d+)?$/,
                 message: 'Please enter a valid price',
               },
             })}
@@ -80,6 +86,7 @@ export default function CreateProductPage({
             </p>
           )}
         </div>
+
         <div className="relative">
           <input
             type="text"
@@ -93,6 +100,7 @@ export default function CreateProductPage({
             </p>
           )}
         </div>
+
         <div className="relative">
           <textarea
             placeholder="Description"
