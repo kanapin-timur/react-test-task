@@ -12,6 +12,7 @@ import {
 import { useGetProductsQuery } from '../store/services/productApi';
 import ProductItem from '../components/ProductItem';
 import { Link } from 'react-router-dom';
+import { IoMdArrowRoundBack, IoMdArrowRoundForward } from 'react-icons/io';
 import Spinner from '../components/Spinner';
 
 const ProductsPage: React.FC = () => {
@@ -147,10 +148,11 @@ const ProductsPage: React.FC = () => {
       <div className="flex justify-center gap-2 mt-6">
         <button
           disabled={currentPage === 1}
-          className="px-3 py-1 border rounded disabled:opacity-50"
+          className="px-3 py-1 disabled:opacity-50 cursor-pointer"
           onClick={() => dispatch(setCurrentPage(currentPage - 1))}
+          aria-label="Previous Page"
         >
-          Back
+          <IoMdArrowRoundBack size={20} />
         </button>
 
         <span className="px-3 py-1">
@@ -159,10 +161,11 @@ const ProductsPage: React.FC = () => {
 
         <button
           disabled={currentPage === totalPages}
-          className="px-3 py-1 border rounded disabled:opacity-50"
+          className="px-3 py-1 disabled:opacity-50 cursor-pointer"
           onClick={() => dispatch(setCurrentPage(currentPage + 1))}
+          aria-label="Next Page"
         >
-          Forward
+          <IoMdArrowRoundForward size={20} />
         </button>
       </div>
     </div>

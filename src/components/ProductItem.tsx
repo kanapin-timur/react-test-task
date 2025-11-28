@@ -52,7 +52,7 @@ const ProductItem: React.FC<{ product: IProduct }> = ({ product }) => {
   return (
     <Link
       to={`/react-test-task/products/${product.id}`}
-      className="h-[250px] rounded-xl p-3 shadow-sm bg-gray-200"
+      className="h-[250px] rounded-xl p-3 shadow-sm bg-gray-200 transform transition-all duration-300 hover:scale-105 hover:-translate-y-1 hover:shadow-xl"
       draggable={false}
     >
       <div className="flex justify-center">
@@ -60,6 +60,7 @@ const ProductItem: React.FC<{ product: IProduct }> = ({ product }) => {
           src={product.image}
           alt={product.title}
           className="w-[100px] h-[150px] object-contain"
+          aria-label={`Image of ${product.title}`}
         ></img>
       </div>
 
@@ -117,12 +118,14 @@ const ProductItem: React.FC<{ product: IProduct }> = ({ product }) => {
               onClick={(e) => {
                 e.stopPropagation();
               }}
+              aria-label="Save Product"
             >
               Save
             </button>
             <button
               className="text-sm py-1 px-2 font-medium bg-gray-300 rounded-md hover:bg-gray-400 transition duration-200 cursor-pointer"
               onClick={cancelEditing}
+              aria-label="Cancel Editing"
             >
               Cancel
             </button>
@@ -133,46 +136,66 @@ const ProductItem: React.FC<{ product: IProduct }> = ({ product }) => {
       {!isEditing && (
         <div className="flex justify-end gap-2 mt-3">
           {isLiked ? (
-            <AiFillLike
+            <button
               onClick={(e) => {
                 e.preventDefault();
                 e.stopPropagation();
                 dispatch(toggleFavorite(product.id));
               }}
-              size={20}
-              className="hover:scale-110 transition duration-200"
-            />
+              className="cursor-pointer"
+              aria-label="Unlike Product"
+            >
+              <AiFillLike
+                size={20}
+                className="hover:scale-110 transition duration-200"
+              />
+            </button>
           ) : (
-            <AiOutlineLike
+            <button
               onClick={(e) => {
                 e.preventDefault();
                 e.stopPropagation();
                 dispatch(toggleFavorite(product.id));
               }}
-              size={20}
-              className="hover:scale-110 transition duration-200"
-            />
+              className="cursor-pointer"
+              aria-label="Like Product"
+            >
+              <AiOutlineLike
+                size={20}
+                className="hover:scale-110 transition duration-200"
+              />
+            </button>
           )}
 
-          <FaTrash
+          <button
             onClick={(e) => {
               e.preventDefault();
               e.stopPropagation();
               dispatch(deleteProduct(product.id));
             }}
-            size={18}
-            className="hover:scale-110 transition duration-200"
-          />
+            className="cursor-pointer"
+            aria-label="Delete Product"
+          >
+            <FaTrash
+              size={18}
+              className="hover:scale-110 transition duration-200"
+            />
+          </button>
 
-          <FaPencilAlt
+          <button
             onClick={(e) => {
               e.preventDefault();
               e.stopPropagation();
               setIsEditing(true);
             }}
-            size={18}
-            className="hover:scale-110 transition duration-200"
-          />
+            className="cursor-pointer"
+            aria-label="Edit Product"
+          >
+            <FaPencilAlt
+              size={18}
+              className="hover:scale-110 transition duration-200"
+            />
+          </button>
         </div>
       )}
     </Link>
